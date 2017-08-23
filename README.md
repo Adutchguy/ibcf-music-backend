@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CASEHAWK
 
 ## Application Summary
@@ -31,3 +32,6 @@ To update an event, the user clicks on the event in the calendar view and makes 
 
 ### Delete Event
 To delete an event, the user clicks on the event in the calendar view and then clicks on the delete event button.
+=======
+# ibcf-music-backend
+>>>>>>> a5e0e925ead338a3ff6b93c83763d755d9f7ba04
