@@ -1,11 +1,11 @@
 'use strict';
 
 const User = require('../../model/user.js');
-const Event = require('../../model/event.js');
+const Available = require('../../model/available.js');
 
 module.exports = () => {
   return Promise.all([
     User.remove({}),
-    Event.remove({}),
+    Available.remove({}),
   ]);
 };

@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const eventSchema = mongoose.Schema({
+const availableSchema = mongoose.Schema({
   title: {type: String, required: true},
   allDay: {type: Boolean},
   start: {type: Date, required: true},
@@ -13,4 +13,4 @@ const eventSchema = mongoose.Schema({
   ownerId: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'user'},
 });
 
-module.exports = mongoose.model('event', eventSchema);
+module.exports = mongoose.model('availableDate', availableSchema);

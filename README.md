@@ -1,16 +1,16 @@
 <<<<<<< HEAD
-# CASEHAWK
+# IBCF MUSIC
 
 ## Application Summary
 
-'CaseHawk' is a calendar application built specifically for use at legal offices. Users can create, update, view, and delete events on the calendar. The front end is developed in ReactJS and JavaScript and the back end is developed in Node.js and JavaScript. The front end repository is available here. [CaseHawk repository](https://github.com/vagabond0079/casehawk-frontend).
+'IBCF Music' is a calendar application built specifically for use at IBCF. Users can create, update, view, and delete availability on the calendar. The front end is developed in ReactJS and JavaScript and the back end is developed in Node.js and JavaScript. The front end repository is available here:
 
 ## Website
-Fully deployed site: `https://casehawk-frontend.herokuapp.com`
+Fully deployed site:
 
 ## Overview
 ### Minimum Viable Product
-This RESTful API was created for the CaseHawk. It provides the necessary back-end infrastructure and functionality to sign up and sign in. As well as create, read, update and delete calendar events. 
+This RESTful API was created for the IBCF Music ministry. It provides the necessary back-end infrastructure and functionality to sign up and sign in. As well as create, read, update and delete calendar availability.
 
 ## Run examples locally
 
@@ -18,20 +18,19 @@ This RESTful API was created for the CaseHawk. It provides the necessary back-en
 * Retrieve dependencies: `yarn install`
 * Start databases: `yarn start-db`
 * Start server: `yarn start`
-* Clone the frontend repository at https://github.com/vagabond0079/casehawk-frontend
+* Clone the front end repository at:
 
 
 ### Create Account/Sign-in
 Users will have the option to create a new account or sign-in on the initial page. Account creations requires a valid e-mail, a username, and a password. Sign-in requires username and password.
 
-###  Create Event
-To create an event, the user enters a start and end date and time. There is also an option to mark the event as "all day" The name of the event is entered into the tex box, and the event type is selected from the dropdown menu (options are Appointment, Court Date, Deadline, Task). When the add event button is clicked, the event will populate to the calendar view.
+###  Create available entry
+To create an available entry, the user enters a start and end date and time. There is also an option to mark the available entry as "all day" The name of the available entry is entered into the text box, and the available entry type is selected from the drop down menu (options are Appointment, Court Date, Deadline, Task). When the add available entry button is clicked, the available entry will populate to the calendar view.
 
-### Update Event
-To update an event, the user clicks on the event in the calendar view and makes the necessary changes in the available fields. The event is updated when the update event button is clicked.
+### Update available entry
+To update an available entry, the user clicks on the available entry in the calendar view and makes the necessary changes in the available fields. The available entry is updated when the update available entry button is clicked.
 
-### Delete Event
-To delete an event, the user clicks on the event in the calendar view and then clicks on the delete event button.
+### Delete available entry
+To delete an available entry, the user clicks on the available entry in the calendar view and then clicks on the delete available entry button.
 =======
 # ibcf-music-backend
->>>>>>> a5e0e925ead338a3ff6b93c83763d755d9f7ba04
