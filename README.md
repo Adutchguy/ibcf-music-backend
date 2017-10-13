@@ -19,8 +19,8 @@
 ---
 
 ## API Endpoints
----
-> #### POST `/api/userSignup`
+
+> ### POST `/api/userSignup`
 
 **Description:**
 
@@ -44,8 +44,7 @@ json formatted data.
 * The response body will contain a token.
 * The response Header will set a browser cookie called `X-IBCF-Token` which may be used for authentication. The Cookie is set to expire after 1 week by default. I will likely change this to a session cookie in the future.
 ---
-> #### GET `/api/userLogin`
-<br/>
+> ### GET `/api/userLogin`
 
 **Description:**
 
