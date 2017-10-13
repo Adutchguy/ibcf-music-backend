@@ -3,11 +3,8 @@
 	"version": "1.0.0",
 	"description": "A backend application (API) for the ibcf music frontend.",
 	"main": "index.js",
-	"directories": {
-		"test": "test"
-	},
 	"scripts": {
-		"test": "nyc mocha",
+		"test": "nyc mocha ./src/test",
 		"start": "node index.js",
 		"start-db": "mkdir -p ./db && mongod --dbpath ./db",
 		"stop-db": "killall mongod",

@@ -86,7 +86,6 @@ userSchema.methods.tokenCreate = function(){
 const User = module.exports = mongoose.model('user', userSchema);
 
 User.create = function(data){
-  console.log('User.create data: \n', data);
   let password = data.password;
   delete data.password;
   return new User(data)

@@ -16,7 +16,6 @@ const daysToMilliseconds = days => days * 1000 * 60 * 60 * 24;
 // /api/signup
 userRouter.post('/api/userSignup', jsonParser, (req, res, next) => {
   console.log('---Hit POST /api/userSignup---');
-  console.log('POST req.body:\n', req.body);
   User.create(req.body)
     .then(token => {
       res.cookie('X-IBCF-Token', token);
@@ -27,7 +26,6 @@ userRouter.post('/api/userSignup', jsonParser, (req, res, next) => {
 
 userRouter.get('/api/userLogin', basicAuth, (req, res, next) => {
   console.log('---Hit GET /api/userSignin---');
-  console.log('GET req.body:\n', req.user);
   req.user
     .tokenCreate()
     .then(token => {
