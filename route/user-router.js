@@ -19,19 +19,18 @@ userRouter.post('/api/userSignup', jsonParser, (req, res, next) => {
   console.log('POST req.body:\n', req.body);
   User.create(req.body)
     .then(token => {
-      let cookieOptions = { maxAge: daysToMilliseconds(7) };
       res.cookie('X-IBCF-Token', token);
       res.send(token);
     })
     .catch(next);
 });
 
-userRouter.get('/api/userSignin', basicAuth, (req, res, next) => {
-  console.log('Hit GET /api/userSignin');
+userRouter.get('/api/userLogin', basicAuth, (req, res, next) => {
+  console.log('---Hit GET /api/userSignin---');
+  console.log('GET req.body:\n', req.user);
   req.user
     .tokenCreate()
     .then(token => {
-      let cookieOptions = { maxAge: daysToMilliseconds(7) };
       res.cookie('X-IBCF-Token', token);
       res.send(token);
     })
