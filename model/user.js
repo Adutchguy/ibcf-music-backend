@@ -5,10 +5,38 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
-  username: {type: String, required: true, unique: true},
-  passwordHash: {type: String, required: true, unique: true},
-  tokenSeed: {type: String, unique: true},
-  email: {type: String, required: true},
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+  },
+  passwordHash: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  tokenSeed: {
+    type: String,
+    unique: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  isAdmin: {
+    type: Boolean,
+    required: true,
+  },
+});
+
+userSchema.virtual('fullName').get(function() {
+  return this.firstName + ' ' + this.lastName;
 });
 
 userSchema.methods.passwordHashCreate = function(password){
@@ -58,6 +86,7 @@ userSchema.methods.tokenCreate = function(){
 const User = module.exports = mongoose.model('user', userSchema);
 
 User.create = function(data){
+  console.log('User.create data: \n', data);
   let password = data.password;
   delete data.password;
   return new User(data)

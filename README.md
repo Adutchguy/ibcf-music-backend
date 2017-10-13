@@ -1,25 +1,73 @@
-<<<<<<< HEAD
-# IBCF MUSIC
+# IBCF MUSIC API
 
 ## Application Summary
 
-'IBCF Music' is a calendar application built specifically for use at IBCF. Users can create, update, view, and delete availability on the calendar. The front end is developed in ReactJS and JavaScript and the back end is developed in Node.js and JavaScript. The front end repository is available here:
+'IBCF Music API' serves as the back-end for the IBCF-Music web application. This API allows users to sign-up, login, and list availability.
 
-## Website
-Fully deployed site:
 
-## Overview
-### Minimum Viable Product
-This RESTful API was created for the IBCF Music ministry. It provides the necessary back-end infrastructure and functionality to sign up and sign in. As well as create, read, update and delete calendar availability.
+---
+
+
 
 ## Run examples locally
 
-* Clone this repository
-* Retrieve dependencies: `yarn install`
-* Start databases: `yarn start-db`
-* Start server: `yarn start`
-* Clone the front end repository at:
+1. Clone the repository.
+2. Install dependencies: `yarn install` || `npm install`
+3. Start database: `yarn start-db` || `npm start-db`
+4. Start server: `yarn start` || `npm start`
 
+---
+
+## API Endpoints
+---
+> #### POST `/api/userSignup`
+
+**Description:**
+
+* This endpoint enables new users to sign-up in order to begin adding availability entries.
+
+**Required Values:**
+
+* The body of the request must contain the following
+json formatted data.
+
+|Key|Value|Required|
+|---|-----|--------|
+|'username'|`String`| yes|
+|'password'|`String`|yes|
+|'firstName'|`String`|no|
+|lastName|`String`| no|
+|'email'|`String`|yes|
+|'isAdmin'|`Boolean`|yes|
+
+**Response:**
+* The response body will contain a token.
+* The response Header will set a browser cookie called `X-IBCF-Token` which may be used for authentication. The Cookie is set to expire after 1 week by default. I will likely change this to a session cookie in the future.
+---
+> #### GET `/api/userLogin`
+<br/>
+
+**Description:**
+
+* This endpoint enables users to login and set the correct browser cookie for authentication.
+
+**Required Values:**
+
+* The body of the request must contain the following
+json formatted data.
+
+|Key|Value|Required|
+|---|-----|--------|
+|'username'|`String`| yes|
+|'password'|`String`|yes|
+|'firstName'|`String`|no|
+|lastName|`String`| no|
+|'email'|`String`|yes|
+|'isAdmin'|`Boolean`|yes|
+
+**Response:**
+* The response body will contain a token.
+* The response Header will set a browser cookie called `X-IBCF-Token` which may be used for authentication. The Cookie is set to expire after 1 week by default. I will likely change this to a session cookie in the future.
 
 ### Create Account/Sign-in
 Users will have the option to create a new account or sign-in on the initial page. Account creations requires a valid e-mail, a username, and a password. Sign-in requires username and password.
