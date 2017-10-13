@@ -4,19 +4,12 @@
 
 'IBCF Music API' serves as the back-end for the IBCF-Music web application. This API allows users to sign-up, login, and list availability.
 
-
----
-
-
-
 ## Run examples locally
 
 1. Clone the repository.
 2. Install dependencies: `yarn install` || `npm install`
 3. Start database: `yarn start-db` || `npm start-db`
 4. Start server: `yarn start` || `npm start`
-
----
 
 ## API Endpoints
 
