@@ -1,7 +1,7 @@
 {
-	"name": "Neighbster-API",
+	"name": "ibcf-backend",
 	"version": "1.0.0",
-	"description": "A backend application (API) that will allow people to create to-do items.",
+	"description": "A backend application (API) for the ibcf music frontend.",
 	"main": "index.js",
 	"directories": {
 		"test": "test"
@@ -13,20 +13,18 @@
 		"stop-db": "killall mongod",
 		"lint": "eslint ."
 	},
-	"repository": "git+https://github.com/Saulgreene/Neighbster-API.git",
 	"keywords": [],
-	"author": "derekcfarmer <derek.farmer@gmail.com>",
-	"license": "ISC",
+	"author": "mdm_8@hotmail.com",
+	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/Saulgreene/Neighbster-API/issues"
+		"url": "https://github.com/Adutchguy/ibcf-music-backend/issues"
 	},
-	"homepage": "https://github.com/Saulgreene/Neighbster-API#readme",
+	"homepage": "https://github.com/Adutchguy/ibcf-music-backend",
 	"dependencies": {
 		"aws-sdk": "^2.82.0",
 		"bcrypt": "^1.0.2",
 		"body-parser": "^1.17.2",
 		"cors": "^2.8.3",
-		"crypto": "0.0.3",
 		"dotenv": "^4.0.0",
 		"express": "^4.15.3",
 		"fs-extra": "^3.0.1",

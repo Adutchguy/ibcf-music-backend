@@ -1,7 +1,7 @@
 'use strict';
 
 // npm modules
-const { Router } = require('express');
+const Router = require('express');
 const jsonParser = require('body-parser').json();
 
 // app modules
@@ -14,25 +14,25 @@ const userRouter = (module.exports = new Router());
 const daysToMilliseconds = days => days * 1000 * 60 * 60 * 24;
 
 // /api/signup
-userRouter.post('/api/signup', jsonParser, (req, res, next) => {
-  console.log('Hit POST /api/signup');
-  console.log('req.body', req.body);
+userRouter.post('/api/userSignup', jsonParser, (req, res, next) => {
+  console.log('---Hit POST /api/userSignup---');
+  console.log('POST req.body:\n', req.body);
   User.create(req.body)
     .then(token => {
       let cookieOptions = { maxAge: daysToMilliseconds(7) };
-      res.cookie('X-Casehawk-Token', token);
+      res.cookie('X-IBCF-Token', token);
       res.send(token);
     })
     .catch(next);
 });
 
-userRouter.get('/api/signin', basicAuth, (req, res, next) => {
-  console.log('Hit GET /api/signin');
+userRouter.get('/api/userSignin', basicAuth, (req, res, next) => {
+  console.log('Hit GET /api/userSignin');
   req.user
     .tokenCreate()
     .then(token => {
       let cookieOptions = { maxAge: daysToMilliseconds(7) };
-      res.cookie('X-Casehawk-Token', token);
+      res.cookie('X-IBCF-Token', token);
       res.send(token);
     })
     .catch(next);

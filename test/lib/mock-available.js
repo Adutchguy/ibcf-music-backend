@@ -1,18 +1,18 @@
 'use strict';
 
 const faker = require('faker');
-const Event = require('../../model/event.js');
+const Available = require('../../model/available.js');
 const mockUser = require('./mock-user.js');
 
-const mockEvent = module.exports = {};
+const mockAvailable = module.exports = {};
 
-mockEvent.createOne = () => {
+mockAvailable.createOne = () => {
   let result = {};
   return mockUser.createOne()
     .then(userData => {
       result = userData;
-      return new Event({
-        title: 'mock-event',
+      return new Available({
+        title: 'mock-available',
         start: 'Wed Aug 16 2017 17:03:41 GMT-0700 (PDT)',
         end: 'Wed Aug 16 2017 19:03:41 GMT-0700 (PDT)',
         eventType: 'appointment',
@@ -20,8 +20,8 @@ mockEvent.createOne = () => {
       })
         .save();
     })
-    .then(event => {
-      result.event = event;
+    .then(available => {
+      result.available = available;
       return result;
     });
 };
