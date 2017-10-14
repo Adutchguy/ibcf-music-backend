@@ -38,8 +38,6 @@ userRouter.get('/api/userLogin', basicAuth, (req, res, next) => {
 
 userRouter.put('/api/userUpdate', cookieAuth, jsonParser, (req,res,next) => {
   console.log('---Hit PUT /api/userUpdate---');
-  console.log('PUT req.user:\n', req.user);
-  console.log('PUT req.body:\n', req.body);
   let options = {
     runValidators: true,
     new: true,
