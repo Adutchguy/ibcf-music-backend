@@ -57,6 +57,16 @@ json formatted data.
 * The response header will set a browser *session* cookie called `X-IBCF-Token` which may be used for authentication.
 
 ---
+> ### GET `/api/user`
+
+**Description:**
+
+* This endpoint enables queries for a users profile once they are logged in.
+
+**Response:**
+* The response body will contain the users data json formatted.
+
+---
 > ### PUT `/api/userUpdate`
 
 **Description:**
@@ -88,17 +98,3 @@ json formatted data.
 * This endpoint simply enables users to delete their profile.
 
 ---
-
-### Create Account/Sign-in
-Users will have the option to create a new account or sign-in on the initial page. Account creations requires a valid e-mail, a username, and a password. Sign-in requires username and password.
-
-###  Create available entry
-To create an available entry, the user enters a start and end date and time. There is also an option to mark the available entry as "all day" The name of the available entry is entered into the text box, and the available entry type is selected from the drop down menu (options are Appointment, Court Date, Deadline, Task). When the add available entry button is clicked, the available entry will populate to the calendar view.
-
-### Update available entry
-To update an available entry, the user clicks on the available entry in the calendar view and makes the necessary changes in the available fields. The available entry is updated when the update available entry button is clicked.
-
-### Delete available entry
-To delete an available entry, the user clicks on the available entry in the calendar view and then clicks on the delete available entry button.
-=======
-# ibcf-music-backend
