@@ -34,8 +34,8 @@ json formatted data.
 |'isAdmin'|`Boolean`|yes|
 
 **Response:**
-* The response body will contain a token.
-* The response Header will set a browser cookie called `X-IBCF-Token` which may be used for authentication. The Cookie is set to expire after 1 week by default. I will likely change this to a session cookie in the future.
+* The response body will contain a **token**.
+* The response Header will set a browser **session** cookie called `X-IBCF-Token` which may be used for authentication.
 ---
 > ### GET `/api/userLogin`
 
@@ -53,8 +53,8 @@ json formatted data.
 |'password'|`String`|yes|
 
 **Response:**
-* The response body will contain a *token*.
-* The response header will set a browser *session* cookie called `X-IBCF-Token` which may be used for authentication.
+* The response body will contain a **token**.
+* The response header will set a browser **session** cookie called `X-IBCF-Token` which may be used for authentication.
 
 ---
 > ### GET `/api/user`
