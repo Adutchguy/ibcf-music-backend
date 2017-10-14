@@ -41,11 +41,11 @@ json formatted data.
 
 **Description:**
 
-* This endpoint enables users to login and set the correct browser cookie for authentication.
+* This endpoint enables users to login and set the correct browser session cookie for authentication.
 
 **Required Values:**
 
-* The following values must be provided via basic authentication in order to receive a session token.
+* The following values must be provided via basic authentication in order to receive a browser session cookie.
 
 |Key|Value|Required|
 |---|-----|--------|
@@ -64,7 +64,7 @@ json formatted data.
 * This endpoint enables queries for a users profile once they are logged in.
 
 **Response:**
-* The response body will contain the users data json formatted.
+* The response body will contain the users json formatted data.
 
 ---
 > ### PUT `/api/userUpdate`
@@ -95,6 +95,7 @@ json formatted data.
 
 **Description:**
 
-* This endpoint simply enables users to delete their profile.
+* This endpoint simply enables logged-in users to delete their profile.
+* You will likely want to consider clearing the browser session cookie after the user deletes their profile in order to log them out.
 
 ---
