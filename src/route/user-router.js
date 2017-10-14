@@ -44,7 +44,14 @@ userRouter.put('/api/userUpdate', cookieAuth, jsonParser, (req,res,next) => {
     fields: {'username': 1, 'firstName': 1, 'lastName': 1, 'email': 1, 'isAdmin': 1},
   };
   User.findByIdAndUpdate(req.user._id, req.body, options)
-    .then((data) => res.send(data))
+    .then((data) => res.json(data))
+    .catch(next);
+});
+
+userRouter.delete('/api/userDelete', cookieAuth, (req,res,next) => {
+  console.log('---Hit DELETE /api/userDelete---');
+  User.findByIdAndRemove(req.user._id)
+    .then(() => res.sendStatus(204))
     .catch(next);
 });
 
