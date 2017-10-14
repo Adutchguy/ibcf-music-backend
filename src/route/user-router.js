@@ -41,9 +41,10 @@ userRouter.put('/api/userUpdate', cookieAuth, jsonParser, (req,res,next) => {
   let options = {
     runValidators: true,
     new: true,
+    fields: {'username': 1, 'firstName': 1, 'lastName': 1, 'email': 1, 'isAdmin': 1},
   };
   User.findByIdAndUpdate(req.user._id, req.body, options)
-    .then(data => res.json(data))
+    .then((data) => res.send(data))
     .catch(next);
 });
 
