@@ -85,10 +85,7 @@ json formatted data.
 
 **Description:**
 
-* This endpoint enables users to delete their profile.
-
-**Response:**
-* The response body will contain the newly updated user profile.
+* This endpoint simply enables users to delete their profile.
 
 ---
 
