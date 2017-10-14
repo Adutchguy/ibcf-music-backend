@@ -1,21 +1,16 @@
 'use strict';
 
-// npm modules
 const Router = require('express');
 const jsonParser = require('body-parser').json();
 
-// app modules
-const {deleteCookie} = require('../lib/util.js');
 const User = require('../model/user.js');
 const errorHandler = require('../lib/error-middleware.js');
 const basicAuth = require('../lib/basic-auth-middleware.js');
 const cookieAuth = require('../lib/cookie-auth-middleware.js');
 
-// module logic
 const userRouter = (module.exports = new Router());
 const daysToMilliseconds = days => days * 1000 * 60 * 60 * 24;
 
-// /api/signup
 userRouter.post('/api/userSignup', jsonParser, (req, res, next) => {
   console.log('---Hit POST /api/userSignup---');
   User.create(req.body)
@@ -37,10 +32,10 @@ userRouter.get('/api/userLogin', basicAuth, (req, res, next) => {
     .catch(next);
 });
 
-userRouter.get('/api/userLogout', cookieAuth, (req,res,next) => {
-  console.log('---Hit GET /api/userLogout---');
-  req.user
-    .then(() => res.cookie(deleteCookie('X-IBCF-Token')))
+userRouter.get('/api/user', cookieAuth, (req,res,next) => {
+  console.log('---Hit PUT /api/userUpdate---');
+  User.findById(req.user._id, {'username': 1, 'firstName': 1, 'lastName': 1, 'email': 1, 'isAdmin': 1})
+    .then(data => res.json(data))
     .catch(next);
 });
 
