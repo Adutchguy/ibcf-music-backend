@@ -5,6 +5,7 @@ const Router = require('express');
 const jsonParser = require('body-parser').json();
 
 // app modules
+const {deleteCookie} = require('../lib/util.js');
 const User = require('../model/user.js');
 const errorHandler = require('../lib/error-middleware.js');
 const basicAuth = require('../lib/basic-auth-middleware.js');
@@ -33,6 +34,13 @@ userRouter.get('/api/userLogin', basicAuth, (req, res, next) => {
       res.cookie('X-IBCF-Token', token);
       res.send(token);
     })
+    .catch(next);
+});
+
+userRouter.get('/api/userLogout', cookieAuth, (req,res,next) => {
+  console.log('---Hit GET /api/userLogout---');
+  req.user
+    .then(() => res.cookie(deleteCookie('X-IBCF-Token')))
     .catch(next);
 });
 
