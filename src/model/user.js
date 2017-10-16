@@ -30,6 +30,11 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  timeStamp: {
+    type: Date,
+    required: true,
+    default: Date.now,
+  },
 });
 
 userSchema.virtual('fullName').get(function() {
