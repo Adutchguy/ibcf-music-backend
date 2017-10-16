@@ -67,6 +67,16 @@ json formatted data.
 * The response body will contain the users json formatted data.
 
 ---
+> ### GET `/api/userFullName`
+
+**Description:**
+
+* This endpoint enables queries for a users full name via a virtual getter.
+
+**Response:**
+* The response body will contain only the users full name.
+
+---
 > ### PUT `/api/userUpdate`
 
 **Description:**
