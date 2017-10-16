@@ -30,10 +30,6 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  isAdmin: {
-    type: Boolean,
-    required: true,
-  },
 });
 
 userSchema.virtual('fullName').get(function() {

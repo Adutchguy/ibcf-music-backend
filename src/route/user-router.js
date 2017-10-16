@@ -34,7 +34,7 @@ userRouter.get('/api/userLogin', basicAuth, (req, res, next) => {
 
 userRouter.get('/api/user', cookieAuth, (req,res,next) => {
   console.log('---Hit PUT /api/user---');
-  User.findById(req.user._id, {'username': 1, 'firstName': 1, 'lastName': 1, 'email': 1, 'isAdmin': 1})
+  User.findById(req.user._id, {'username': 1, 'firstName': 1, 'lastName': 1, 'email': 1})
     .then(data => res.json(data))
     .catch(next);
 });
@@ -51,7 +51,7 @@ userRouter.put('/api/userUpdate', cookieAuth, jsonParser, (req,res,next) => {
   let options = {
     runValidators: true,
     new: true,
-    fields: {'username': 1, 'firstName': 1, 'lastName': 1, 'email': 1, 'isAdmin': 1},
+    fields: {'username': 1, 'firstName': 1, 'lastName': 1, 'email': 1},
   };
   User.findByIdAndUpdate(req.user._id, req.body, options)
     .then((data) => res.json(data))

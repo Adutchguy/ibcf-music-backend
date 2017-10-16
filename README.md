@@ -31,7 +31,6 @@ json formatted data.
 |'firstName'|`String`|no|
 |lastName|`String`| no|
 |'email'|`String`|yes|
-|'isAdmin'|`Boolean`|yes|
 
 **Response:**
 * The response body will contain a **token**.
@@ -95,7 +94,6 @@ json formatted data.
 |'firstName'|`String`|no|
 |lastName|`String`| no|
 |'email'|`String`|no|
-|'isAdmin'|`Boolean`|no|
 
 **Response:**
 * The response body will contain the newly updated user profile.
