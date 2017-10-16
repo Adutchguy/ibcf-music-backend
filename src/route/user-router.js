@@ -33,9 +33,16 @@ userRouter.get('/api/userLogin', basicAuth, (req, res, next) => {
 });
 
 userRouter.get('/api/user', cookieAuth, (req,res,next) => {
-  console.log('---Hit PUT /api/userUpdate---');
+  console.log('---Hit PUT /api/user---');
   User.findById(req.user._id, {'username': 1, 'firstName': 1, 'lastName': 1, 'email': 1, 'isAdmin': 1})
     .then(data => res.json(data))
+    .catch(next);
+});
+
+userRouter.get('/api/userFullName', cookieAuth, (req,res,next) => {
+  console.log('---Hit PUT /api/userFullName---');
+  User.findById(req.user._id)
+    .then(data => res.json(data.fullName))
     .catch(next);
 });
 
