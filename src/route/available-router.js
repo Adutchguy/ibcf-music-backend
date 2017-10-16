@@ -8,43 +8,41 @@ const jsonParser = require('body-parser').json();
 // app modules
 const Available = require('../model/available.js');
 const basicAuth = require('../lib/basic-auth-middleware.js');
-const bearerAuth = require('../lib/bearer-auth-middleware.js');
+const cookieAuth = require('../lib/cookie-auth-middleware.js');
 
 // module logic
 const availableRouter = (module.exports = new Router());
 
-// /api/availability
-availableRouter.post('/api/availability', bearerAuth, jsonParser, (req, res, next) => {
-  console.log('Hit POST /api/availability');
+availableRouter.get('/api/availability', (req, res, next) => {
+  console.log('Hit GET /api/availability/:id');
+  Available.find({})
+    .then(available => res.json(available))
+    .catch(next);
+});
+
+availableRouter.post('/api/availability/createOne', cookieAuth, jsonParser, (req, res, next) => {
+  console.log('Hit POST /api/availability/createOne');
   new Available({
+    fullName: req.user.fullName,
+    firstName: req.user.firstName,
+    lastName: req.user.lastName,
+    date: req.body.date,
     title: req.body.title,
-    allDay: req.body.allDay,
-    start: req.body.start,
-    end: req.body.end,
-    eventType: req.body.eventType,
-    tag: req.body.tag,
-    notify: req.body.notify,
-    ownerId: req.user._id.toString(),
+    ownerId: req.user._id,
   })
     .save()
     .then(available => {
-      console.log('POST available req', req.body);
-      console.log('POST available res', available);
       res.json(available);
     })
     .catch(next);
 });
 
-availableRouter.get('/api/availability/:id', (req, res, next) => {
-  console.log('Hit GET /api/availability/:id');
-  Available.findById(req.params.id).then(available => res.json(available)).catch(next);
-});
 
 availableRouter.get('/api/availability/', (req, res, next) => {
   Available.find({}).then(availability => res.json(availability)).catch(next);
 });
 
-availableRouter.put('/api/availability/:id', bearerAuth, jsonParser, (req, res, next) => {
+availableRouter.put('/api/availability/:id', cookieAuth, jsonParser, (req, res, next) => {
   console.log('Hit PUT /api/availability/:id');
 
   let options = {
@@ -63,7 +61,7 @@ availableRouter.put('/api/availability/:id', bearerAuth, jsonParser, (req, res, 
     .catch(next);
 });
 
-availableRouter.delete('/api/availability/:id', bearerAuth, (req, res, next) => {
+availableRouter.delete('/api/availability/:id', cookieAuth, (req, res, next) => {
   console.log('Hit DELETE /api/availability/:id');
   Available.findById(req.params.id)
     .then(available => {
