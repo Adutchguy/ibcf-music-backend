@@ -16,7 +16,7 @@ const availableSchema = new Schema({
     type: String,
     required: true,
   },
-  title: {
+  comment: {
     type: String,
     required: true,
   },
@@ -32,6 +32,7 @@ const availableSchema = new Schema({
     type: Date,
     required: true,
     default: Date.now,
+    unique: true,
   },
 });
 

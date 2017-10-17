@@ -34,14 +34,14 @@ describe('Testing Available model', () => {
         .post(`${API_URL}/api/availability`)
         .set('Authorization', `Bearer ${tempUserData.token}`)
         .send({
-          title: 'mock-available',
+          comment: 'mock-available',
           start: 'Wed Aug 16 2017 17:03:41 GMT-0700 (PDT)',
           end: 'Wed Aug 16 2017 19:03:41 GMT-0700 (PDT)',
           eventType: 'appointment',
         })
         .then(res => {
           expect(res.status).toEqual(200);
-          expect(res.body.title).toEqual('mock-available');
+          expect(res.body.comment).toEqual('mock-available');
           expect(res.body.start).toEqual('2017-08-17T00:03:41.000Z');
           expect(res.body.end).toEqual('2017-08-17T02:03:41.000Z');
           expect(res.body.eventType).toEqual('appointment');
@@ -56,7 +56,7 @@ describe('Testing Available model', () => {
       return superagent
         .post(`${API_URL}/api/availability`)
         .send({
-          title: 'mock-available',
+          comment: 'mock-available',
           start: 'Wed Aug 16 2017 17:03:41 GMT-0700 (PDT)',
           end: 'Wed Aug 16 2017 19:03:41 GMT-0700 (PDT)',
           eventType: 'appointment',
@@ -79,7 +79,7 @@ describe('Testing Available model', () => {
         .post(`${API_URL}/api/availability`)
         .set('Authorization', `Bearer ${tempUserData.token}`)
         .send({
-          title: 'mock-available',
+          comment: 'mock-available',
           start: 'Wed Aug 16 2017 17:03:41 GMT-0700 (PDT)',
           end: 'Wed Aug 16 2017 19:03:41 GMT-0700 (PDT)',
           eventType: {},
@@ -95,7 +95,7 @@ describe('Testing Available model', () => {
         .get(`${API_URL}/api/availability/${tempUserData.available._id}`)
         .then(res => {
           expect(res.status).toEqual(200);
-          expect(res.body.title).toEqual(tempUserData.available.title);
+          expect(res.body.comment).toEqual(tempUserData.available.comment);
           expect(res.body.allDay).toEqual(tempUserData.available.allDay);
           expect(new Date(res.body.start)).toEqual(tempUserData.available.start);
           expect(new Date(res.body.end)).toEqual(tempUserData.available.end);
@@ -111,7 +111,7 @@ describe('Testing Available model', () => {
           console.log('tempUserData.available', tempUserData.available);
           console.log('res.body', res.body);
           expect(res.status).toEqual(200);
-          expect(res.body[0].title).toEqual(tempUserData.available.title);
+          expect(res.body[0].comment).toEqual(tempUserData.available.comment);
           expect(res.body[0].allDay).toEqual(tempUserData.available.allDay);
           expect(new Date(res.body[0].start)).toEqual(tempUserData.available.start);
           expect(new Date(res.body[0].end)).toEqual(tempUserData.available.end);
@@ -132,10 +132,10 @@ describe('Testing Available model', () => {
       return superagent
         .put(`${API_URL}/api/availability/${tempUserData.available._id}`)
         .set('Authorization', `Bearer ${tempUserData.token}`)
-        .send({title: 'updated-title'})
+        .send({comment: 'updated-comment'})
         .then(res => {
           expect(res.status).toEqual(200);
-          expect(res.body.title).toEqual('updated-title');
+          expect(res.body.comment).toEqual('updated-comment');
           expect(res.body.allDay).toEqual(tempUserData.available.allDay);
           expect(new Date(res.body.start)).toEqual(tempUserData.available.start);
           expect(new Date(res.body.end)).toEqual(tempUserData.available.end);
@@ -166,7 +166,7 @@ describe('Testing Available model', () => {
       return superagent
         .put(`${API_URL}/api/availability/${tempUserData.available._id}`)
         .set('Authorization', `Bearer ${tempUserData.token}`)
-        .send({ title: '' })
+        .send({ comment: '' })
         .then(res => {
           throw res;
         })

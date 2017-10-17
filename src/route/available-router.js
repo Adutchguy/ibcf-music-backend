@@ -14,20 +14,20 @@ const cookieAuth = require('../lib/cookie-auth-middleware.js');
 const availableRouter = (module.exports = new Router());
 
 availableRouter.get('/api/availability', (req, res, next) => {
-  console.log('Hit GET /api/availability/:id');
+  console.log('---Hit GET /api/availability---');
   Available.find({})
     .then(available => res.json(available))
     .catch(next);
 });
 
 availableRouter.post('/api/availability/createOne', cookieAuth, jsonParser, (req, res, next) => {
-  console.log('Hit POST /api/availability/createOne');
+  console.log('---Hit POST /api/availability/createOne---');
   new Available({
     fullName: req.user.fullName,
     firstName: req.user.firstName,
     lastName: req.user.lastName,
     date: req.body.date,
-    title: req.body.title,
+    comment: req.body.comment,
     ownerId: req.user._id,
   })
     .save()
@@ -38,20 +38,25 @@ availableRouter.post('/api/availability/createOne', cookieAuth, jsonParser, (req
 });
 
 
-availableRouter.get('/api/availability/', (req, res, next) => {
-  Available.find({}).then(availability => res.json(availability)).catch(next);
-});
 
-availableRouter.put('/api/availability/:id', cookieAuth, jsonParser, (req, res, next) => {
-  console.log('Hit PUT /api/availability/:id');
+availableRouter.put('/api/availability/updateOne/:id', cookieAuth, jsonParser, (req, res, next) => {
+  console.log('---Hit PUT /api/availability/updateOne/:id---');
+  console.log('req.params.id:\n', req.params.id);
+  console.log('req.user._id:\n', req.user._id);
 
   let options = {
     runValidators: true,
     new: true,
   };
-
   Available.findById(req.params.id)
-    .then(available => {
+    .then(data => {
+      if(req.user._id.toString() !== data.ownerId.toString()) {
+        throw Error('Unauthorized - cannot change another users resource.');
+      } else {
+        return data;
+      }
+    })
+    .then(data => {
       Available.findByIdAndUpdate(req.params.id, req.body, options)
         .then(available => {
           res.json(available);
@@ -61,19 +66,19 @@ availableRouter.put('/api/availability/:id', cookieAuth, jsonParser, (req, res, 
     .catch(next);
 });
 
-availableRouter.delete('/api/availability/:id', cookieAuth, (req, res, next) => {
-  console.log('Hit DELETE /api/availability/:id');
-  Available.findById(req.params.id)
-    .then(available => {
-      if (req.user._id.toString() !== available.ownerId.toString()) {
-        throw Error('Unauthorized - cannot change another users resource');
-      }
-      return available;
-    })
-    .then(available => {
-      Available.findByIdAndRemove(req.params.id)
-        .then(() => res.sendStatus(204))
-        .catch(next);
-    })
-    .catch(next);
-});
+// availableRouter.delete('/api/availability/:id', cookieAuth, (req, res, next) => {
+//   console.log('Hit DELETE /api/availability/:id');
+//   Available.findById(req.params.id)
+//     .then(available => {
+//       if (req.user._id.toString() !== available.ownerId.toString()) {
+//         throw Error('Unauthorized - cannot change another users resource');
+//       }
+//       return available;
+//     })
+//     .then(available => {
+//       Available.findByIdAndRemove(req.params.id)
+//         .then(() => res.sendStatus(204))
+//         .catch(next);
+//     })
+//     .catch(next);
+// });
