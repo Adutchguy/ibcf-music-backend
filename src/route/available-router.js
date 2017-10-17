@@ -65,19 +65,19 @@ availableRouter.put('/api/availability/updateOne/:id', cookieAuth, jsonParser, (
     .catch(next);
 });
 
-// availableRouter.delete('/api/availability/:id', cookieAuth, (req, res, next) => {
-//   console.log('Hit DELETE /api/availability/:id');
-//   Available.findById(req.params.id)
-//     .then(available => {
-//       if (req.user._id.toString() !== available.ownerId.toString()) {
-//         throw Error('Unauthorized - cannot change another users resource');
-//       }
-//       return available;
-//     })
-//     .then(available => {
-//       Available.findByIdAndRemove(req.params.id)
-//         .then(() => res.sendStatus(204))
-//         .catch(next);
-//     })
-//     .catch(next);
-// });
+availableRouter.delete('/api/availability/deleteOne/:id', cookieAuth, (req, res, next) => {
+  console.log('Hit DELETE /api/availability/deleteOne/:id');
+  Available.findById(req.params.id)
+    .then(data => {
+      if (req.user._id.toString() !== data.ownerId.toString()) {
+        throw Error('Unauthorized - cannot delete another users resource');
+      }
+      return;
+    })
+    .then(() => {
+      Available.findByIdAndRemove(req.params.id)
+        .then(() => res.sendStatus(204))
+        .catch(next);
+    })
+    .catch(next);
+});
