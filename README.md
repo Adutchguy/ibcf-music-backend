@@ -134,7 +134,7 @@ JSON formatted data.
 
 |Key|Value|
 |---|-----|
-|'fullname'|'String'|
+|'fullname'|`String`|
 |'firstName'|`String`|
 |'lastName'|`String`|
 |'comment'|`String`|
@@ -156,7 +156,7 @@ JSON formatted data.
 
 |Key|Value|
 |---|-----|
-|'fullname'|'String'|
+|'fullname'|`String`|
 |'firstName'|`String`|
 |'lastName'|`String`|
 |'comment'|`String`|
@@ -191,7 +191,7 @@ JSON formatted data.
 
 |Key|Value|
 |---|-----|
-|'fullname'|'String'|
+|'fullname'|`String`|
 |'firstName'|`String`|
 |'lastName'|`String`|
 |'comment'|`String`|
