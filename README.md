@@ -174,7 +174,7 @@ JSON formatted data.
 
 **Description:**
 
-* This endpoint enables new users to update availability entries that they initially created.
+* This endpoint enables users to update single availability entries that they created.
 
 **Required Values:**
 
@@ -200,4 +200,15 @@ JSON formatted data.
 |'ownerId'|`String`|
 |'timeStamp'|`ISO Date String`|
 |'date'|`Array of ISO Date Strings`|
+---
+
+> ### DELETE `/api/availability/deleteOne/:id`
+
+**Example**
+> `/api/availability/deleteOne/59e65efd04521b2dd46fcb1a`
+
+**Description:**
+
+* This endpoint enables users to delete single availability entries that they created.
+
 ---
