@@ -166,3 +166,38 @@ JSON formatted data.
 |'timeStamp'|`ISO Date String`|
 |'date'|`Array of ISO Date Strings`|
 ---
+
+> ### PUT `/api/availability/updateOne/:id`
+
+**Example**
+> `/api/availability/updateOne/59e65efd04521b2dd46fcb1a`
+
+**Description:**
+
+* This endpoint enables new users to update availability entries that they initially created.
+
+**Required Values:**
+
+* The body of the request may contain the following
+JSON formatted data.
+
+|Key|Value|Required|
+|---|-----|--------|
+|'date'|`ISO Date`| yes|
+|'comment'|`String`|yes|
+
+**Response:**
+* The response body will contain the new availability entry. consisting of the following JSON formatted data:
+
+|Key|Value|
+|---|-----|
+|'fullname'|'String'|
+|'firstName'|`String`|
+|'lastName'|`String`|
+|'comment'|`String`|
+|_id|`String`|
+|'email'|`String`|
+|'ownerId'|`String`|
+|'timeStamp'|`ISO Date String`|
+|'date'|`Array of ISO Date Strings`|
+---
