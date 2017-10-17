@@ -27,6 +27,7 @@ availableRouter.post('/api/availability/createOne', cookieAuth, jsonParser, (req
     firstName: req.user.firstName,
     lastName: req.user.lastName,
     date: req.body.date,
+    email: req.user.email,
     comment: req.body.comment,
     ownerId: req.user._id,
   })
@@ -41,8 +42,6 @@ availableRouter.post('/api/availability/createOne', cookieAuth, jsonParser, (req
 
 availableRouter.put('/api/availability/updateOne/:id', cookieAuth, jsonParser, (req, res, next) => {
   console.log('---Hit PUT /api/availability/updateOne/:id---');
-  console.log('req.params.id:\n', req.params.id);
-  console.log('req.user._id:\n', req.user._id);
 
   let options = {
     runValidators: true,
