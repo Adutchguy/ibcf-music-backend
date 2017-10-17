@@ -12,7 +12,7 @@ mockAvailable.createOne = () => {
     .then(userData => {
       result = userData;
       return new Available({
-        title: 'mock-available',
+        comment: 'mock-available',
         start: 'Wed Aug 16 2017 17:03:41 GMT-0700 (PDT)',
         end: 'Wed Aug 16 2017 19:03:41 GMT-0700 (PDT)',
         eventType: 'appointment',

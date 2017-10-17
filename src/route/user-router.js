@@ -8,6 +8,7 @@ const errorHandler = require('../lib/error-middleware.js');
 const basicAuth = require('../lib/basic-auth-middleware.js');
 const cookieAuth = require('../lib/cookie-auth-middleware.js');
 
+// module logic
 const userRouter = (module.exports = new Router());
 const daysToMilliseconds = days => days * 1000 * 60 * 60 * 24;
 
