@@ -1,7 +1,5 @@
 'use strict';
 
-const path = require('path');
-
 require('dotenv').config({ path: `${__dirname}/../.test.env` });
 
 const expect = require('expect');
@@ -19,28 +17,29 @@ describe('Testing User model', () => {
   afterEach(clearDB);
 
   let data = {
-    username: 'test-user',
-    password: 'secret',
-    email: 'test@email.com',
+    'username': 'test1',
+    'password': 'pass1',
+    'firstName': 'first',
+    'lastName': 'last',
+    'email': 'test1@hotmail.com',
   };
 
   describe('Testing POST', () => {
     it('should return a token and a 200 status', () => {
-      return superagent.post(`${API_URL}/api/signup`).send(data).then(res => {
-        console.log('res.body', res.body);
+      return superagent.post(`${API_URL}/api/userSignup`).send(data).then(res => {
         expect(res.status).toEqual(200);
         expect(res.text).toExist();
         expect(res.text.length > 1).toBeTruthy();
       });
     });
     it('should respond with a 400 if no body provided', () => {
-      return superagent.post(`${API_URL}/api/signup`).send({}).catch(res => {
+      return superagent.post(`${API_URL}/api/userSignup`).send({}).catch(res => {
         expect(res.status).toEqual(400);
       });
     });
     it('should respond with a 400 if invalid body', () => {
       return superagent
-        .post(`${API_URL}/api/signup`)
+        .post(`${API_URL}/api/userSignup`)
         .send({
           username: '',
           email: '',
@@ -58,7 +57,7 @@ describe('Testing User model', () => {
         })
         .then(user => {
           let tempUser = user;
-          return superagent.post(`${API_URL}/api/signup`).send({
+          return superagent.post(`${API_URL}/api/userSignup`).send({
             username: tempUser.username,
             password: 'secret2',
             email: 'test2@email.com',

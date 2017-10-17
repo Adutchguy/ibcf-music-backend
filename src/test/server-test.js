@@ -2,16 +2,17 @@
 
 const path = require('path');
 
-require('dotenv').config({ path: `${__dirname}/../.test.env` });
+require('dotenv').config({ path: `../../.test.env` });
 
 const expect = require('expect');
 const superagent = require('superagent');
 
-const server = require('../lib/server.js');
+const server = require(`../lib/test-server.js`);
 
 const API_URL = process.env.API_URL;
 
-describe('testing server', () => {
+describe.only('testing server', () => {
+  console.log(API_URL);
   after(server.stop);
   describe('Testing Server', () => {
     it('should return 404 for non-existent route', () => {
