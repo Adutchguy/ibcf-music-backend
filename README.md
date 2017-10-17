@@ -144,3 +144,25 @@ JSON formatted data.
 |'timeStamp'|`ISO Date String`|
 |'date'|`Array of ISO Date Strings`|
 ---
+
+> ### GET `/api/availability`
+
+**Description:**
+
+* This endpoint enables users to get all availability entries in the database.
+
+**Response:**
+* The response body will contain an array of objects with each object containing the following JSON formatted data:
+
+|Key|Value|
+|---|-----|
+|'fullname'|'String'|
+|'firstName'|`String`|
+|'lastName'|`String`|
+|'comment'|`String`|
+|_id|`String`|
+|'email'|`String`|
+|'ownerId'|`String`|
+|'timeStamp'|`ISO Date String`|
+|'date'|`Array of ISO Date Strings`|
+---
