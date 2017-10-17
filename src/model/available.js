@@ -24,6 +24,10 @@ const availableSchema = new Schema({
     type: [Date],
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+  },
   ownerId: {
     type: Schema.Types.ObjectId,
     required: true,
