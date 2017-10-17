@@ -1,4 +1,4 @@
-# IBCF MUSIC API
+# **IBCF MUSIC API**
 
 # Application Summary
 
@@ -13,7 +13,7 @@
 
 # API Endpoints
 
-## USER
+## *USER*
 
 
 > ### POST `/api/userSignup`
@@ -111,7 +111,7 @@ JSON formatted data.
 
 ---
 
-## AVAILABILITY
+## *AVAILABILITY*
 
 > ### POST `/api/availability/createOne`
 
