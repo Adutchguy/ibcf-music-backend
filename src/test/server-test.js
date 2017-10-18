@@ -1,30 +1,26 @@
 'use strict';
 
-const path = require('path');
-
-require('dotenv').config({ path: `../../.test.env` });
+require('dotenv').config();
 
 const expect = require('expect');
 const superagent = require('superagent');
 
-const server = require(`../lib/test-server.js`);
+// const db = require('./lib/db.js');
+const server = require(`./lib/test-server.js`);
 
-const API_URL = process.env.API_URL;
+const TEST_API_URL = process.env.TEST_API_URL;
 
-describe.only('testing server', () => {
-  console.log(API_URL);
+describe('testing server', () => {
+  before(server.start);
   after(server.stop);
   describe('Testing Server', () => {
     it('should return 404 for non-existent route', () => {
-      server.start();
-      return superagent
-        .get(`${API_URL}/api/not-a-route`)
+      return superagent.get(`${TEST_API_URL}/api/not-a-route`)
         .then(res => {
           throw res;
         })
         .catch(res => {
           expect(res.status).toEqual(404);
-          server.stop();
         });
     });
     it('should throw an error if server already DOWN', () => {
@@ -47,8 +43,8 @@ describe('testing error-handler 500 response', () => {
   after(server.stop);
   describe('Testing Error-Handler', () => {
     it('should return 500 for server error', done => {
-      superagent.get(`${API_URL}/api/500test`).end((err, res) => {
-        expect(res.status).toEqual(500);
+      superagent.get(`${TEST_API_URL}/api/500test`).catch((err, res) => {
+        expect(err.status).toEqual(500);
         done();
       });
     });

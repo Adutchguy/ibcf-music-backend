@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').config({path: `${__dirname}/../../.env`});
+require('dotenv').config();
 
 //npm modules
 const cors = require('cors');
@@ -9,13 +9,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 //app modules
+const db = require('./db.js');
 
 //module logic
+const MONGODB_URI = process.env.MONGODB_URI;
+
 // config and connect to mongoose
-mongoose.Promise = Promise;
-mongoose.connect(process.env.MONGODB_URI);
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB/Mongoose connection error:'));
+db.start(MONGODB_URI);
 
 //*create app
 const app = express();

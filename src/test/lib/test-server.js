@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').config({path: `../../test.env`});
+require('dotenv').config();
 
 //npm modules
 const cors = require('cors');
@@ -9,13 +9,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 //app modules
+const db = require('../../lib/db.js');
 
 //module logic
+const TEST_PORT = process.env.TEST_PORT;
+const TEST_MONGODB_URI = process.env.TEST_MONGODB_URI;
+const CORS_ORIGINS = process.env.CORS_ORIGINS;
+
 // config and connect to mongoose
-mongoose.Promise = Promise;
-mongoose.connect(process.env.MONGODB_URI);
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB/Mongoose connection error:'));
+db.start(TEST_MONGODB_URI);
 
 //*create app
 const app = express();
@@ -24,7 +26,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cors({
   credentials: true,
-  origin: process.env.CORS_ORIGINS,
+  origin: CORS_ORIGINS,
 }));
 
 //* load routes
@@ -44,9 +46,9 @@ server.isOn = false;
 server.start = () => {
   return new Promise((resolve, reject) => {
     if(!server.isOn){
-      server.http = app.listen(process.env.PORT, () => {
+      server.http = app.listen(TEST_PORT, () => {
         server.isOn = true;
-        console.log('server up', process.env.PORT);
+        console.log('server up', TEST_PORT);
         resolve();
       });
       return;
