@@ -9,13 +9,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 //app modules
-const db = require('./db.js');
 
 //module logic
 const MONGODB_URI = process.env.MONGODB_URI;
+const PORT = process.env.PORT;
 
 // config and connect to mongoose
-db.start(MONGODB_URI);
+mongoose.Promise = Promise;
+mongoose.connect(process.env.MONGODB_URI);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB/Mongoose connection error:'));
 
 //*create app
 const app = express();
@@ -44,9 +47,9 @@ server.isOn = false;
 server.start = () => {
   return new Promise((resolve, reject) => {
     if(!server.isOn){
-      server.http = app.listen(process.env.PORT, () => {
+      server.http = app.listen(PORT, () => {
         server.isOn = true;
-        console.log('server up', process.env.PORT);
+        console.log('server up', PORT);
         resolve();
       });
       return;

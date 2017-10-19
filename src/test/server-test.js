@@ -16,9 +16,6 @@ describe('testing server', () => {
   describe('Testing Server', () => {
     it('should return 404 for non-existent route', () => {
       return superagent.get(`${TEST_API_URL}/api/not-a-route`)
-        .then(res => {
-          throw res;
-        })
         .catch(res => {
           expect(res.status).toEqual(404);
         });

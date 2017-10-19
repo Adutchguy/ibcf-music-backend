@@ -9,7 +9,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 //app modules
-const db = require('../../lib/db.js');
 
 //module logic
 const TEST_PORT = process.env.TEST_PORT;
@@ -17,7 +16,10 @@ const TEST_MONGODB_URI = process.env.TEST_MONGODB_URI;
 const CORS_ORIGINS = process.env.CORS_ORIGINS;
 
 // config and connect to mongoose
-db.start(TEST_MONGODB_URI);
+mongoose.Promise = Promise;
+mongoose.connect(TEST_MONGODB_URI);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB/Mongoose connection error:'));
 
 //*create app
 const app = express();

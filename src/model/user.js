@@ -19,12 +19,10 @@ const userSchema = mongoose.Schema({
   },
   passwordHash: {
     type: String,
-    unique: true,
     required: true,
   },
   tokenSeed: {
     type: String,
-    unique: true,
   },
   email: {
     type: String,
@@ -65,13 +63,8 @@ userSchema.methods.tokenSeedCreate = function(){
     let _tokenSeedCreate = () => {
       this.tokenSeed = crypto.randomBytes(32).toString('hex');
       this.save()
-        .then(() => resolve(this))
-        .catch(err => {
-          if(tries < 1)
-            return reject(err);
-          tries--;
-          _tokenSeedCreate();
-        });
+        .catch(err)
+        .then(() => resolve(this));
     };
 
     _tokenSeedCreate();
