@@ -63,8 +63,8 @@ userSchema.methods.tokenSeedCreate = function(){
     let _tokenSeedCreate = () => {
       this.tokenSeed = crypto.randomBytes(32).toString('hex');
       this.save()
-        .catch(err)
-        .then(() => resolve(this));
+        .then(() => resolve(this))
+        .catch(err => {return reject(err);});
     };
 
     _tokenSeedCreate();

@@ -42,12 +42,10 @@ describe.only('---Testing User model---', () => {
         .send(data)
         .then(() => {
           return superagent.post(`${TEST_API_URL}/api/userSignup`)
-            .send(data);
-        })
-        .then(res => console.log(res))
-        .catch(err => {
-          console.log('err is test block:\n',err);
-          expect(err.statusCode).toEqual(409);
+            .send(data)
+            .catch(err => {
+              expect(err.status).toEqual(409);
+            });
         });
     });
 
