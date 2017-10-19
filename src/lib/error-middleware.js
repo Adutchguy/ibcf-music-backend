@@ -12,6 +12,9 @@ module.exports = (err, req, res, next) => {
   if(err.message.includes('arguments required'))
     return(res.sendStatus(400));
 
+  if(err.message.includes('data and salt arguments required'))
+    return(res.sendStatus(400));
+
   // if password/username validation error respond with 401
   if(err.message.includes('unauthorized'))
     return(res.sendStatus(401));
