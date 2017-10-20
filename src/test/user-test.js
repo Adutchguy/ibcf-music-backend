@@ -155,6 +155,18 @@ describe('---Testing User model---', () => {
             });
         });
     });
+
+    it('should return a 401 "unauthorized password does not match"', () => {
+      return superagent.post(`${TEST_API_URL}/api/userSignup`)
+        .send(data)
+        .then(() => {
+          return superagent.get(`${TEST_API_URL}/api/userLogin`)
+            .auth('test1', 'badpass')
+            .catch(err => {
+              expect(err.status).toEqual(401);
+            });
+        });
+    });
   });
 
 

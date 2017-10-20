@@ -1,4 +1,4 @@
-# **IBCF MUSIC API**
+# **IBCF MUSIC API** [![Build Status](https://travis-ci.org/Adutchguy/ibcf-music-backend.svg?branch=master)](https://travis-ci.org/Adutchguy/ibcf-music-backend)
 
 # Application Summary
 
