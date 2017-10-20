@@ -12,6 +12,7 @@ const cookieAuth = require('../lib/cookie-auth-middleware.js');
 const userRouter = (module.exports = new Router());
 const daysToMilliseconds = days => days * 1000 * 60 * 60 * 24;
 
+// Tested
 userRouter.post('/api/userSignup', jsonParser, (req, res, next) => {
   console.log('---Hit POST /api/userSignup---');
   User.create(req.body)
@@ -22,6 +23,7 @@ userRouter.post('/api/userSignup', jsonParser, (req, res, next) => {
     .catch(next);
 });
 
+// Tested
 userRouter.get('/api/userLogin', basicAuth, (req, res, next) => {
   console.log('---Hit GET /api/userSignin---');
   req.user
@@ -33,6 +35,7 @@ userRouter.get('/api/userLogin', basicAuth, (req, res, next) => {
     .catch(next);
 });
 
+// Tested
 userRouter.get('/api/user', cookieAuth, (req,res,next) => {
   console.log('---Hit PUT /api/user---');
   User.findById(req.user._id, {'username': 1, 'firstName': 1, 'lastName': 1, 'email': 1})
@@ -40,6 +43,7 @@ userRouter.get('/api/user', cookieAuth, (req,res,next) => {
     .catch(next);
 });
 
+// Tested
 userRouter.get('/api/userFullName', cookieAuth, (req,res,next) => {
   console.log('---Hit PUT /api/userFullName---');
   User.findById(req.user._id)
@@ -47,15 +51,18 @@ userRouter.get('/api/userFullName', cookieAuth, (req,res,next) => {
     .catch(next);
 });
 
+// Testing
 userRouter.put('/api/userUpdate', cookieAuth, jsonParser, (req,res,next) => {
   console.log('---Hit PUT /api/userUpdate---');
   let options = {
-    runValidators: true,
     new: true,
     fields: {'username': 1, 'firstName': 1, 'lastName': 1, 'email': 1},
   };
-  User.findByIdAndUpdate(req.user._id, req.body, options)
-    .then((data) => res.json(data))
+  User.findOneAndUpdate({_id: req.user._id}, req.body, options)
+    .then(data => {
+      console.log('DATA:\n', data);
+      res.json(data);
+    })
     .catch(next);
 });
 

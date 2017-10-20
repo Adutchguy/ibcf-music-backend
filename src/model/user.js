@@ -33,7 +33,7 @@ const userSchema = mongoose.Schema({
     required: true,
     default: Date.now,
   },
-});
+},{strict: 'throw'});
 
 userSchema.virtual('fullName').get(function() {
   return this.firstName + ' ' + this.lastName;

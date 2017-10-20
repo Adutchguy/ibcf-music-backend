@@ -5,13 +5,14 @@ const User = require('../model/user.js');
 const universalify = require('universalify');
 
 module.exports = (req, res, next) => {
+  // console.log(req);
   // if any of the following fail, we will next an unauthorized Error
 
   let {cookie} = req.headers;
   if(!cookie)
     return next(new Error('unauthorized not logged in, no cookie found'));
 
-  // check for a bearer tokenseed
+  // check for a cookie tokenseed
   let token = cookie.split('=')[1];
   if(!token)
     return next(new Error('unauthorized no token found'));
@@ -23,9 +24,6 @@ module.exports = (req, res, next) => {
       return User.findOne({tokenSeed: decoded.tokenSeed});
     })
     .then(user => {
-      if(!user)
-        throw new Error('unauthorized no user found');
-      // add the user to the req object
       req.user = user;
       next();
     })
