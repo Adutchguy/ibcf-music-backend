@@ -10,32 +10,56 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    validate: {
+      validator: val => {
+        return isNaN(parseInt(val));
+      },
+      message: `validation failed`,
+    },
   },
   firstName: {
     type: String,
+    required: true,
+    validate: {
+      validator: val => {
+        return isNaN(parseInt(val));
+      },
+      message: `validation failed`,
+    },
   },
   lastName: {
     type: String,
+    required: true,
+    validate: {
+      validator: val => {
+        return isNaN(parseInt(val));
+      },
+      message: `validation failed`,
+    },
   },
   passwordHash: {
     type: String,
-    unique: true,
     required: true,
   },
   tokenSeed: {
     type: String,
-    unique: true,
   },
   email: {
     type: String,
     required: true,
+    validate: {
+      validator: val => {
+        return isNaN(parseInt(val));
+      },
+      message: `validation failed`,
+    },
   },
   timeStamp: {
     type: Date,
     required: true,
     default: Date.now,
   },
-});
+},{strict: 'throw'});
 
 userSchema.virtual('fullName').get(function() {
   return this.firstName + ' ' + this.lastName;
@@ -66,12 +90,7 @@ userSchema.methods.tokenSeedCreate = function(){
       this.tokenSeed = crypto.randomBytes(32).toString('hex');
       this.save()
         .then(() => resolve(this))
-        .catch(err => {
-          if(tries < 1)
-            return reject(err);
-          tries--;
-          _tokenSeedCreate();
-        });
+        .catch(err => {return reject(err);});
     };
 
     _tokenSeedCreate();

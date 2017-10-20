@@ -5,25 +5,27 @@ module.exports = (err, req, res, next) => {
   console.log('Error middleware message:\n', err.message);
   console.log('Error middleware res.body:\n', res.body);
 
-  // if validation error respond with 400
+  // 400 errors
   if(err.message.includes('validation failed'))
     return(res.sendStatus(400));
 
   if(err.message.includes('arguments required'))
     return(res.sendStatus(400));
 
-  // if password/username validation error respond with 401
+
+  if(err.message.includes('not in schema and strict mode is set to throw'))
+    return(res.sendStatus(400));
+
+  // 401 errors
   if(err.message.includes('unauthorized'))
     return(res.sendStatus(401));
-  //
 
-  // if id not found respond with 404
-  if(err.message.includes('objectid failed'))
-    return(res.sendStatus(404));
+  if(err.message.includes('invalid signature'))
+    return(res.sendStatus(401));
 
-  // if duplicate key respond with 409
+  // 409 errors
   if(err.message.includes('duplicate key'))
     return(res.sendStatus(409));
-
+  
   return(res.sendStatus(500));
 };

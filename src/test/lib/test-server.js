@@ -11,12 +11,13 @@ const mongoose = require('mongoose');
 //app modules
 
 //module logic
-const MONGODB_URI = process.env.MONGODB_URI;
-const PORT = process.env.PORT;
+const TEST_PORT = process.env.TEST_PORT;
+const TEST_MONGODB_URI = process.env.TEST_MONGODB_URI;
+const CORS_ORIGINS = process.env.CORS_ORIGINS;
 
 // config and connect to mongoose
 mongoose.Promise = Promise;
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(TEST_MONGODB_URI);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB/Mongoose connection error:'));
 
@@ -27,18 +28,18 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cors({
   credentials: true,
-  origin: process.env.CORS_ORIGINS,
+  origin: CORS_ORIGINS,
 }));
 
 //* load routes
-app.use(require('../route/user-router.js'));
-app.use(require('../route/available-router.js'));
+app.use(require('../../route/user-router.js'));
+app.use(require('../../route/available-router.js'));
 
 //* add 404 routes
 app.all('/api/*', (req, res, next) => res.sendStatus(404));
 
 //* require error middleware
-app.use(require('./error-middleware.js'));
+app.use(require('../../lib/error-middleware.js'));
 
 //* export start and stop
 const server = module.exports = {};
@@ -47,9 +48,9 @@ server.isOn = false;
 server.start = () => {
   return new Promise((resolve, reject) => {
     if(!server.isOn){
-      server.http = app.listen(PORT, () => {
+      server.http = app.listen(TEST_PORT, () => {
         server.isOn = true;
-        console.log('server up', PORT);
+        console.log('server up', TEST_PORT);
         resolve();
       });
       return;

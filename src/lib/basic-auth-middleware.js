@@ -28,7 +28,5 @@ module.exports = (req, res, next) => {
       req.user = user;
       next();
     })
-    .catch(err => {
-      next(new Error('Unauthorized, find one has failed in basic auth middleware'));
-    });
+    .catch(next);
 };
