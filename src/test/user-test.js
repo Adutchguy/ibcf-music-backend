@@ -222,7 +222,7 @@ describe('---Testing User model---', () => {
 
 
 
-  describe('Testing GET /api/userDullName', () => {
+  describe('Testing GET /api/userFullName', () => {
     after(clearDB);
 
     it('should return user\'s full concatenated name and a 200 status', () => {
@@ -265,7 +265,7 @@ describe('---Testing User model---', () => {
 
 
 
-  describe.only('Testing PUT /api/userUpdate', () => {
+  describe('Testing PUT /api/userUpdate', () => {
     let updatedData = {
       firstName: 'updatedFN',
       lastName: 'updatedLN',
@@ -314,6 +314,47 @@ describe('---Testing User model---', () => {
 
     it('should return a 401 "invalid signature"', () => {
       return superagent.put(`${TEST_API_URL}/api/userUpdate`)
+        .set('Cookie', ['X-IBCF-Token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlblNlZWQiOiJmNzQwZWVhMjE2MjgxNDYyY2Q1NDUyMmFlNDg0NDYyMDA2MjdlYjZmMDk2NWQ1MjIzNDMxOTBjNzIwNTkwNGI1IiwiaWF0IjoxNTA4NDQ0MDgyfQ.fs9YlsRFz3u_NlFzGk1B5liW5NhbIDZUJyh1eFLngfg'])
+        .catch(err => {
+          expect(err.status).toEqual(401);
+        });
+    });
+  });
+
+
+
+
+  describe('Testing DELETE /api/userDelete', () => {
+    after(clearDB);
+
+    it('should delete user\'s profile data and return 204 status', () => {
+      return agent.post(`${TEST_API_URL}/api/userSignup`)
+        .send(data)
+        .then(() => {
+          return agent.delete(`${TEST_API_URL}/api/userDelete`)
+            .then(res => {
+              expect(res.status).toEqual(204);
+            });
+        });
+    });
+
+    it('should return a 401 "unauthorized not logged in, no cookie found"', () => {
+      return superagent.delete(`${TEST_API_URL}/api/userDelete`)
+        .catch(err => {
+          expect(err.status).toEqual(401);
+        });
+    });
+
+    it('should return a 401 "unauthorized no token found"', () => {
+      return superagent.delete(`${TEST_API_URL}/api/userDelete`)
+        .set('Cookie', ['X-IBCF-Token='])
+        .catch(err => {
+          expect(err.status).toEqual(401);
+        });
+    });
+
+    it('should return a 401 "invalid signature"', () => {
+      return superagent.delete(`${TEST_API_URL}/api/userDelete`)
         .set('Cookie', ['X-IBCF-Token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlblNlZWQiOiJmNzQwZWVhMjE2MjgxNDYyY2Q1NDUyMmFlNDg0NDYyMDA2MjdlYjZmMDk2NWQ1MjIzNDMxOTBjNzIwNTkwNGI1IiwiaWF0IjoxNTA4NDQ0MDgyfQ.fs9YlsRFz3u_NlFzGk1B5liW5NhbIDZUJyh1eFLngfg'])
         .catch(err => {
           expect(err.status).toEqual(401);

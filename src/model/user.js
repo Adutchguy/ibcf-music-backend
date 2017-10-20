@@ -22,7 +22,6 @@ const userSchema = mongoose.Schema({
     required: true,
     validate: {
       validator: val => {
-        console.log('VAL:\n', isNaN(val));
         return isNaN(parseInt(val));
       },
       message: `validation failed`,

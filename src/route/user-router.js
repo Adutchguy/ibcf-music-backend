@@ -7,7 +7,6 @@ const User = require('../model/user.js');
 const errorHandler = require('../lib/error-middleware.js');
 const basicAuth = require('../lib/basic-auth-middleware.js');
 const cookieAuth = require('../lib/cookie-auth-middleware.js');
-const dataValidation = require('../lib/data-validation.js');
 
 // module logic
 const userRouter = (module.exports = new Router());
