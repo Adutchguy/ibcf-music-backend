@@ -11,7 +11,7 @@ addons:
       - gcc-4.8
       - g++-4.8
 env:
-  - DEBUG='true' PORT=3000 CORS_ORIGINS='http://localhost:8080' MONGODB_URI='mongodb://localhost/dev' APP_SECRET=';ljasdfpoiuqewt8erudfhbskjdsljhasoweoerutpiuh;ljs;kjxcvlmxzc.,xzna,sf;tpoqiuer[oiasjf;lkja;kjvc;gkjrgpoigu34o8y[01ruF;ASOIG][RWOT]R[PO34]524YT0I1]-ROTYHI[OIW(*&(&^JSD;LKFjhpoiupu90[T9UIY24POHIJL;KDJFG;OIUERPF9AUD'CKY%^%$WUGHV:IU)(*&*&^R2]epro3q\ty-[g0dfp[ojv;lkdnf;eqfiu[oi[OIU[TOIUY[OIjlj[oiuyqpoiurhtrlfkjadfhvkljfwehrpotiuqerpogufhda;kfjgn;ieurpoiu3gf' API_URL='http://localhost:3000' AWS_BUCKET='ibcf-music-backend' AWS_ACCESS_KEY_ID='AKIAJMUKNSECXACBHLWQ' AWS_SECRET_ACCESS_KEY='cQztOZIQIbBkFMGdaRjapS+iuU8AxNQ6iXmWdKDl' TEST_PORT=7000 TEST_API_URL='http://localhost:7000' TEST_MONGODB_URI='mongodb://localhost/test' TEST_AWS_BUCKET='fake-bucket' TEST_AWS_ACCESS_KEY_ID='fakekey' TEST_AWS_SECRET_ACCESS_KEY='fakekey'
+  - DEBUG='true' PORT=3000 CORS_ORIGINS='http://localhost:8080' MONGODB_URI='mongodb://localhost/dev' APP_SECRET=';ljasdfpoiuqewt8erudfhbskjdsljhasoweoerutpiuh;ljs;kjxcvlmxzc.,xzna,sf;tpoqiuer[oiasjf;lkja;kjvc;gkjrgpoigu34o8y[01ruF;ASOIG][RWOT]R[PO34]524YT0I1]-ROTYHI[OIW(*&(&^JSD;LKFjhpoiupu90[T9UIY24POHIJL;KDJFG;OIUERPF9AUD'CKY%^%$WUGHV:IU)(*&*&^R2]epro3q\ty-[g0dfp[ojv;lkdnf;eqfiu[oi[OIU[TOIUY[OIjlj[oiuyqpoiurhtrlfkjadfhvkljfwehrpotiuqerpogufhda;kfjgn;ieurpoiu3gf' API_URL='http://localhost:3000' AWS_BUCKET='ibcf-music-backend' TEST_PORT=7000 TEST_API_URL='http://localhost:7000' TEST_MONGODB_URI='mongodb://localhost/test'
 sudo: required
 before_script: yarn i
 script:
