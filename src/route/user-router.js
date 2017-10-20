@@ -7,6 +7,7 @@ const User = require('../model/user.js');
 const errorHandler = require('../lib/error-middleware.js');
 const basicAuth = require('../lib/basic-auth-middleware.js');
 const cookieAuth = require('../lib/cookie-auth-middleware.js');
+const dataValidation = require('../lib/data-validation.js');
 
 // module logic
 const userRouter = (module.exports = new Router());
@@ -55,14 +56,12 @@ userRouter.get('/api/userFullName', cookieAuth, (req,res,next) => {
 userRouter.put('/api/userUpdate', cookieAuth, jsonParser, (req,res,next) => {
   console.log('---Hit PUT /api/userUpdate---');
   let options = {
+    runValidators: true,
     new: true,
     fields: {'username': 1, 'firstName': 1, 'lastName': 1, 'email': 1},
   };
   User.findOneAndUpdate({_id: req.user._id}, req.body, options)
-    .then(data => {
-      console.log('DATA:\n', data);
-      res.json(data);
-    })
+    .then(data => res.json(data))
     .catch(next);
 });
 

@@ -291,8 +291,7 @@ describe('---Testing User model---', () => {
 
     it('should return a 400 "validation failed"', () => {
       return agent.put(`${TEST_API_URL}/api/userUpdate`)
-        .set('Content-Type', 'application/json')
-        .send({'firstName': true})
+        .send({firstName: 546})
         .catch(err => {
           expect(err.status).toEqual(400);
         });

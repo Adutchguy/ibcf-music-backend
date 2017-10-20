@@ -10,12 +10,33 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    validate: {
+      validator: val => {
+        return isNaN(parseInt(val));
+      },
+      message: `validation failed`,
+    },
   },
   firstName: {
     type: String,
+    required: true,
+    validate: {
+      validator: val => {
+        console.log('VAL:\n', isNaN(val));
+        return isNaN(parseInt(val));
+      },
+      message: `validation failed`,
+    },
   },
   lastName: {
     type: String,
+    required: true,
+    validate: {
+      validator: val => {
+        return isNaN(parseInt(val));
+      },
+      message: `validation failed`,
+    },
   },
   passwordHash: {
     type: String,
@@ -27,6 +48,12 @@ const userSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
+    validate: {
+      validator: val => {
+        return isNaN(parseInt(val));
+      },
+      message: `validation failed`,
+    },
   },
   timeStamp: {
     type: Date,
