@@ -24,6 +24,7 @@ availableRouter.post('/api/availability/createOne', cookieAuth, jsonParser, (req
   console.log('---Hit POST /api/availability/createOne---');
   new Available({
     fullName: req.user.fullName,
+    username: req.user.username,
     firstName: req.user.firstName,
     lastName: req.user.lastName,
     date: req.body.date,
