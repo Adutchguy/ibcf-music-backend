@@ -38,6 +38,6 @@ const availableSchema = new Schema({
     default: Date.now,
     unique: true,
   },
-});
+},{strict: 'throw'});
 
 module.exports = mongoose.model('availableDate', availableSchema);

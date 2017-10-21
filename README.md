@@ -178,6 +178,7 @@ JSON formatted data.
 
 **Required Values:**
 
+* The :id is the \_id of the availability object to be updated.
 * The body of the request may contain the following
 JSON formatted data.
 
