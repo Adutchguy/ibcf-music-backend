@@ -29,13 +29,13 @@ let newUser2 = {
 };
 
 let newAvailability = {
-  date: [new Date(2017,10,20)],
+  date: new Date('2017-10-21T03:01:16.029Z'),
   comment: 'This is a test comment.',
 };
 
 let updateAvailability = {
   comment: 'This is an update test comment.',
-  date: [new Date(2017,2,1)],
+  date: new Date('2017-08-21T03:01:16.029Z'),
 };
 
 
@@ -109,7 +109,7 @@ describe('Testing Available model', () => {
               expect(res.body.ownerId).toExist();
               expect(res.body._id).toExist();
               expect(res.body.timeStamp).toExist();
-              expect(res.body.date).toEqual(['2017-11-20T08:00:00.000Z']);
+              expect(res.body.date).toEqual('2017-10-21T03:01:16.029Z');
             });
         });
     });
@@ -143,7 +143,7 @@ describe('Testing Available model', () => {
                 .then((res) => {
                   expect(res.status).toEqual(200);
                   expect(res.body.comment).toEqual(updateAvailability.comment);
-                  expect(res.body.date).toEqual(['2017-03-01T08:00:00.000Z']);
+                  expect(res.body.date).toEqual('2017-08-21T03:01:16.029Z');
                   clearDB();
                 });
             });

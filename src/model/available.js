@@ -21,7 +21,7 @@ const availableSchema = new Schema({
     required: true,
   },
   date: {
-    type: [Date],
+    type: Date,
     required: true,
   },
   email: {

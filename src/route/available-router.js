@@ -43,8 +43,6 @@ availableRouter.post('/api/availability/createOne', cookieAuth, jsonParser, (req
     .catch(next);
 });
 
-
-
 availableRouter.put('/api/availability/updateOne/:id', cookieAuth, jsonParser, (req, res, next) => {
   console.log('---Hit PUT /api/availability/updateOne/:id---');
 
