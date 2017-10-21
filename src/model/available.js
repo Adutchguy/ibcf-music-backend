@@ -8,10 +8,6 @@ const availableSchema = new Schema({
     type:String,
     required: true,
   },
-  username: {
-    type: String,
-    required: true,
-  },
   firstName: {
     type: String,
     required: true,
@@ -42,6 +38,6 @@ const availableSchema = new Schema({
     default: Date.now,
     unique: true,
   },
-});
+},{strict: 'throw'});
 
 module.exports = mongoose.model('availableDate', availableSchema);

@@ -13,6 +13,11 @@ const cookieAuth = require('../lib/cookie-auth-middleware.js');
 // module logic
 const availableRouter = (module.exports = new Router());
 
+
+
+
+
+
 availableRouter.get('/api/availability', (req, res, next) => {
   console.log('---Hit GET /api/availability---');
   Available.find({})
@@ -24,7 +29,6 @@ availableRouter.post('/api/availability/createOne', cookieAuth, jsonParser, (req
   console.log('---Hit POST /api/availability/createOne---');
   new Available({
     fullName: req.user.fullName,
-    username: req.user.username,
     firstName: req.user.firstName,
     lastName: req.user.lastName,
     date: req.body.date,
@@ -43,6 +47,9 @@ availableRouter.post('/api/availability/createOne', cookieAuth, jsonParser, (req
 
 availableRouter.put('/api/availability/updateOne/:id', cookieAuth, jsonParser, (req, res, next) => {
   console.log('---Hit PUT /api/availability/updateOne/:id---');
+
+  if(!req.body.date && !req.body.comment)
+    return next(new Error('no data sent with the update request, can not perform update.'));
 
   let options = {
     runValidators: true,
