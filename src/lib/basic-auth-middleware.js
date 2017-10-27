@@ -18,6 +18,7 @@ module.exports = (req, res, next) => {
     return next(new Error('Unauthorized, no authorization provided'));
 
   let encoded = authorization.split('Basic')[1];
+  console.log(encoded);
   if(!encoded)
     return next(new Error('Unauthorized, no basic authorization provided'));
 
