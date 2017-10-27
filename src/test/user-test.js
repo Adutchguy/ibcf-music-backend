@@ -2,6 +2,7 @@
 
 require('dotenv').config();
 
+const CryptoJS = require('crypto-js');
 const expect = require('expect');
 const superagent = require('superagent');
 const agent = superagent.agent();
@@ -11,20 +12,23 @@ const User = require('../model/user.js');
 const clearDB = require('./lib/clear-db.js');
 
 const TEST_API_URL = process.env.TEST_API_URL;
+const passwordHashCreate = function(password){
+  return CryptoJS.AES.encrypt(password, process.env.APP_SECRET).toString();
+};
 
 describe('---Testing User model---', () => {
   before(server.start);
   after(server.stop);
   let data = {
     'username': 'test1',
-    'password': 'pass1',
+    'password': passwordHashCreate('pass1'),
     'firstName': 'first',
     'lastName': 'last',
     'email': 'test1@hotmail.com',
   };
   let data2 = {
     'username': 'test2',
-    'password': 'pass2',
+    'password': passwordHashCreate('pass2'),
     'firstName': 'first',
     'lastName': 'last',
     'email': 'test2@hotmail.com',
@@ -32,7 +36,7 @@ describe('---Testing User model---', () => {
   let extraData = {
     'extra': 'field',
     'username': 'test2',
-    'password': 'pass2',
+    'password': passwordHashCreate('pass2'),
     'firstName': 'first',
     'lastName': 'last',
     'email': 'test2@hotmail.com',
@@ -44,6 +48,7 @@ describe('---Testing User model---', () => {
     'lastName': 'last',
     'email': 'test2@hotmail.com',
   };
+
 
 
 
@@ -99,7 +104,7 @@ describe('---Testing User model---', () => {
         .send(data)
         .then(() => {
           return superagent.get(`${TEST_API_URL}/api/userLogin`)
-            .auth('test1', 'pass1')
+            .auth('test1', passwordHashCreate('pass1'))
             .then(res => {
               expect(res.status).toEqual(200);
               expect(res.text).toExist();
@@ -148,7 +153,7 @@ describe('---Testing User model---', () => {
         .send(data)
         .then(() => {
           return superagent.get(`${TEST_API_URL}/api/userLogin`)
-            .auth('test5', 'pass0')
+            .auth('test5', passwordHashCreate('pass0'))
             .catch(err => {
               expect(err.status).toEqual(401);
             });
@@ -160,7 +165,7 @@ describe('---Testing User model---', () => {
         .send(data)
         .then(() => {
           return superagent.get(`${TEST_API_URL}/api/userLogin`)
-            .auth('test1', 'badpass')
+            .auth('test1', passwordHashCreate('badpass'))
             .catch(err => {
               expect(err.status).toEqual(401);
             });

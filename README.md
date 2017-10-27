@@ -26,6 +26,7 @@
 
 * The body of the request must contain the following
 JSON formatted data.
+* Note that the password field should be sent AES encrypted using, in this case, the [crypto-js](https://github.com/brix/crypto-js) library.
 
 |Key|Value|Required|
 |---|-----|--------|
@@ -48,6 +49,7 @@ JSON formatted data.
 **Required Values:**
 
 * The following values must be provided via basic authentication in order to receive a browser session cookie.
+* Note that the password field should be sent AES encrypted using, in this case, the [crypto-js](https://github.com/brix/crypto-js) library.
 
 |Key|Value|Required|
 |---|-----|--------|

@@ -1,8 +1,10 @@
 'use strict';
 
+require('dotenv').config();
 const Router = require('express');
 const jsonParser = require('body-parser').json();
 
+const CryptoJS = require('crypto-js');
 const User = require('../model/user.js');
 const errorHandler = require('../lib/error-middleware.js');
 const basicAuth = require('../lib/basic-auth-middleware.js');
@@ -12,9 +14,16 @@ const cookieAuth = require('../lib/cookie-auth-middleware.js');
 const userRouter = (module.exports = new Router());
 const daysToMilliseconds = days => days * 1000 * 60 * 60 * 24;
 
+const passwordUnHash = function(hash){
+  let bytes = CryptoJS.AES.decrypt(hash.toString(), process.env.APP_SECRET);
+  let password = bytes.toString(CryptoJS.enc.Utf8);
+  return password;
+};
 // Tested
 userRouter.post('/api/userSignup', jsonParser, (req, res, next) => {
   console.log('---Hit POST /api/userSignup---');
+  !req.body.password ? new Error('data and salt arguments required') :
+    req.body.password = passwordUnHash(req.body.password);
   User.create(req.body)
     .then(token => {
       res.cookie('X-IBCF-Token', token);
