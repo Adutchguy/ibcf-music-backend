@@ -22,7 +22,8 @@ const passwordUnHash = function(hash){
 // Tested
 userRouter.post('/api/userSignup', jsonParser, (req, res, next) => {
   console.log('---Hit POST /api/userSignup---');
-  req.body.password = passwordUnHash(req.body.password);
+  !req.body.password ? new Error('data and salt arguments required') :
+    req.body.password = passwordUnHash(req.body.password);
   User.create(req.body)
     .then(token => {
       res.cookie('X-IBCF-Token', token);

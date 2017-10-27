@@ -104,7 +104,7 @@ describe('---Testing User model---', () => {
         .send(data)
         .then(() => {
           return superagent.get(`${TEST_API_URL}/api/userLogin`)
-            .auth('test1', 'pass1')
+            .auth('test1', passwordHashCreate('pass1'))
             .then(res => {
               expect(res.status).toEqual(200);
               expect(res.text).toExist();
@@ -153,7 +153,7 @@ describe('---Testing User model---', () => {
         .send(data)
         .then(() => {
           return superagent.get(`${TEST_API_URL}/api/userLogin`)
-            .auth('test5', 'pass0')
+            .auth('test5', passwordHashCreate('pass0'))
             .catch(err => {
               expect(err.status).toEqual(401);
             });
@@ -165,7 +165,7 @@ describe('---Testing User model---', () => {
         .send(data)
         .then(() => {
           return superagent.get(`${TEST_API_URL}/api/userLogin`)
-            .auth('test1', 'badpass')
+            .auth('test1', passwordHashCreate('badpass'))
             .catch(err => {
               expect(err.status).toEqual(401);
             });
