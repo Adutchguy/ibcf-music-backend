@@ -2,10 +2,13 @@
 // import AWS from 'aws-sdk';
 // import {extname} from 'path';
 // import fs from 'fs-extra';
+const CryptoJS = require('crypto-js');
 //
 // const s3 = new AWS.S3();
-module.exports = class utils {
-
+module.exports = function passwordUnHash(hash){
+  let bytes = CryptoJS.AES.decrypt(hash.toString(), process.env.REACT_APP_APP_SECRET);
+  let password = bytes.toString(CryptoJS.enc.Utf8);
+  return password;
 };
 // export const removeMulterFile = (data) => fs.remove(data.path);
 // export const removeMulterFiles = (list) => Promise.all(list.map(removeMulterFile));

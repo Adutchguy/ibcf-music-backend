@@ -2,6 +2,7 @@
 
 require('dotenv').config();
 
+const CryptoJS = require('crypto-js');
 const expect = require('expect');
 const superagent = require('superagent');
 const agent = superagent.agent();
@@ -11,20 +12,23 @@ const User = require('../model/user.js');
 const clearDB = require('./lib/clear-db.js');
 
 const TEST_API_URL = process.env.TEST_API_URL;
+const passwordHashCreate = function(password){
+  return CryptoJS.AES.encrypt(password, process.env.APP_SECRET).toString();
+};
 
 describe('---Testing User model---', () => {
   before(server.start);
   after(server.stop);
   let data = {
     'username': 'test1',
-    'password': 'pass1',
+    'password': passwordHashCreate('pass1'),
     'firstName': 'first',
     'lastName': 'last',
     'email': 'test1@hotmail.com',
   };
   let data2 = {
     'username': 'test2',
-    'password': 'pass2',
+    'password': passwordHashCreate('pass2'),
     'firstName': 'first',
     'lastName': 'last',
     'email': 'test2@hotmail.com',
@@ -32,7 +36,7 @@ describe('---Testing User model---', () => {
   let extraData = {
     'extra': 'field',
     'username': 'test2',
-    'password': 'pass2',
+    'password': passwordHashCreate('pass2'),
     'firstName': 'first',
     'lastName': 'last',
     'email': 'test2@hotmail.com',
@@ -44,6 +48,7 @@ describe('---Testing User model---', () => {
     'lastName': 'last',
     'email': 'test2@hotmail.com',
   };
+
 
 
 
