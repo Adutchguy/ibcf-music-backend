@@ -15,7 +15,7 @@ const userRouter = (module.exports = new Router());
 const daysToMilliseconds = days => days * 1000 * 60 * 60 * 24;
 
 const passwordUnHash = function(hash){
-  let bytes = CryptoJS.AES.decrypt(hash.toString(), process.env.APP_SECRET);
+  let bytes = CryptoJS.AES.decrypt(hash, process.env.APP_SECRET);
   let password = bytes.toString(CryptoJS.enc.Utf8);
   return password;
 };

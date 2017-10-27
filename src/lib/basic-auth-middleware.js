@@ -5,7 +5,7 @@ const CryptoJS = require('crypto-js');
 const User = require('../model/user.js');
 
 const passwordUnHash = function(hash){
-  let bytes = CryptoJS.AES.decrypt(hash.toString(), process.env.APP_SECRET);
+  let bytes = CryptoJS.AES.decrypt(hash, process.env.APP_SECRET);
   let password = bytes.toString(CryptoJS.enc.Utf8);
   return password;
 };

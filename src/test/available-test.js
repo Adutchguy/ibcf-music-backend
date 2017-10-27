@@ -2,6 +2,7 @@
 
 require('dotenv').config();
 
+const CryptoJS = require('crypto-js');
 const expect = require('expect');
 const superagent = require('superagent');
 const agent = superagent.agent();
@@ -11,10 +12,13 @@ const clearDB = require('./lib/clear-db.js');
 const server = require('./lib/test-server.js');
 
 const TEST_API_URL = process.env.TEST_API_URL;
+const passwordHashCreate = function(password){
+  return CryptoJS.AES.encrypt(password, process.env.APP_SECRET).toString();
+};
 
 let newUser = {
   'username': 'test1',
-  'password': 'pass1',
+  'password': passwordHashCreate('pass1'),
   'firstName': 'first',
   'lastName': 'last',
   'email': 'test1@hotmail.com',
@@ -22,7 +26,7 @@ let newUser = {
 
 let newUser2 = {
   'username': 'test2',
-  'password': 'pass2',
+  'password': passwordHashCreate('pass2'),
   'firstName': 'Ronald',
   'lastName': 'McDonald',
   'email': 'test2@hotmail.com',
